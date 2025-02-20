@@ -2,41 +2,33 @@ import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import Donation from './donation.js';
 import { type BelongsTo } from '@adonisjs/lucid/types/relations';
+import Reservation from './reservation.js';
 
-export default class Donor extends BaseModel {
+export default class Food extends BaseModel {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: number;
 
   @column()
   declare name: string;
-  
-  @column()
-  declare cnpj: string;
-  
-  @column()
-  declare email: string;
-  
-  @column()
-  declare responsible: string;
-  
-  @column()
-  declare password: string;
 
   @column()
-  declare latitude: number;
+  declare expiration_time: Date;
 
   @column()
-  declare longitude: number;
+  declare quantity: string;
 
   @column()
-  declare local: string;
+  declare status: string;
 
   @belongsTo(() => Donation)
   declare donation: BelongsTo<typeof Donation>
-  
+
+  @belongsTo(() => Reservation)
+  declare reservation: BelongsTo<typeof Reservation>
+
   @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
+  declare createdAt: DateTime;
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
+  declare updatedAt: DateTime;
 }

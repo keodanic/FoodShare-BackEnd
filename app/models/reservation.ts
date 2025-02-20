@@ -7,7 +7,7 @@ import Vulnerable from './vulnerable.js'
 
 export default class Reservation extends BaseModel {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
 
   @column()
   declare status: string
@@ -17,7 +17,7 @@ export default class Reservation extends BaseModel {
 
   @hasMany(() => Food)
   declare food_id: HasMany<typeof Food>
-
+  
   @hasMany(() => Token)
   declare token_id: HasMany<typeof Token>
 

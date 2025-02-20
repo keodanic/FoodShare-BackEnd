@@ -14,7 +14,7 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 
 export default class Vulnerable extends compose(BaseModel, AuthFinder) {
   @column({ isPrimary: true })
-  declare id: string
+  declare id: number
 
   @column()
   declare name: string

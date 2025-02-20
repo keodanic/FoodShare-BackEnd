@@ -6,7 +6,7 @@ import { type BelongsTo } from '@adonisjs/lucid/types/relations'
 
 export default class Donation extends BaseModel {
   @column({ isPrimary: true })
-  declare id: string
+  declare id: number
 
   @column()
   declare donorId: string

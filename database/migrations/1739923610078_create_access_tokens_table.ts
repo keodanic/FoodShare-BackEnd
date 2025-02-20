@@ -6,7 +6,7 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.increments('tokenable_id').references('id').inTable('vulnerables').onDelete('CASCADE')
+      table.integer('tokenable_id').references('id').inTable('vulnerables').onDelete('CASCADE')
       table.string('type').notNullable()
       table.string('name').nullable()
       table.string('hash').notNullable()

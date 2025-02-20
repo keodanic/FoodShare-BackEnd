@@ -4,7 +4,7 @@ import { createVunerableValidator, updateVunerableValidator } from '#validators/
 
 export default class VulnerablesController {
   async index() {
-    const vulnerables = await Vulnerable.query()
+    const vulnerables = await Vulnerable.query().preload('reservations')
     return vulnerables
   }
 

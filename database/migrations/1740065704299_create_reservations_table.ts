@@ -7,23 +7,13 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table
-        .increments('vulnerable_id')
+        .integer('vulnerable_id')
         .references('id')
         .inTable('vulnerables')
         .notNullable()
         .onDelete('CASCADE')
-      table
-        .increments('food_id')
-        .references('id')
-        .inTable('foods')
-        .notNullable()
-        .onDelete('CASCADE')
-      table
-        .increments('token_id')
-        .references('id')
-        .inTable('tokens')
-        .notNullable()
-        .onDelete('CASCADE')
+      table.integer('food_id').references('id').inTable('foods').notNullable().onDelete('CASCADE')
+      table.integer('token_id').references('id').inTable('tokens').notNullable().onDelete('CASCADE')
       table.enum('status', ['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED']).defaultTo('PENDING')
       table.timestamp('pickup_date')
       table.timestamp('created_at')

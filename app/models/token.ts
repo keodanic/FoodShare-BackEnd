@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import Reservation from './reservation.js'
-import { type BelongsTo } from '@adonisjs/lucid/types/relations'
+import { type HasMany } from '@adonisjs/lucid/types/relations'
 
 export default class Token extends BaseModel {
   @column({ isPrimary: true })
@@ -13,8 +13,8 @@ export default class Token extends BaseModel {
   @column()
   declare used: boolean
 
-  @belongsTo(() => Reservation)
-  declare reservation: BelongsTo<typeof Reservation>
+  @hasMany(() => Reservation)
+  declare reservations: HasMany<typeof Reservation>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

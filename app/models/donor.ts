@@ -1,39 +1,39 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
-import Donation from './donation.js';
-import { type BelongsTo } from '@adonisjs/lucid/types/relations';
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import Donation from './donation.js'
+import { type HasMany } from '@adonisjs/lucid/types/relations'
 
 export default class Donor extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare name: string;
-  
-  @column()
-  declare cnpj: string;
-  
-  @column()
-  declare email: string;
-  
-  @column()
-  declare responsible: string;
-  
-  @column()
-  declare password: string;
+  declare name: string
 
   @column()
-  declare latitude: number;
+  declare cnpj: string
 
   @column()
-  declare longitude: number;
+  declare email: string
 
   @column()
-  declare local: string;
+  declare responsible: string
 
-  @belongsTo(() => Donation)
-  declare donation: BelongsTo<typeof Donation>
-  
+  @column()
+  declare password: string
+
+  @column()
+  declare latitude: number
+
+  @column()
+  declare longitude: number
+
+  @column()
+  declare local: string
+
+  @hasMany(() => Donation)
+  declare donations: HasMany<typeof Donation>
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

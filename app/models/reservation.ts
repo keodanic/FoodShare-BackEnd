@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
-import { type HasMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import { type BelongsTo } from '@adonisjs/lucid/types/relations'
 import Token from './token.js'
 import Food from './food.js'
 import Vulnerable from './vulnerable.js'
@@ -15,14 +15,14 @@ export default class Reservation extends BaseModel {
   @column()
   declare pickup_date: string
 
-  @hasMany(() => Food)
-  declare food_id: HasMany<typeof Food>
+  @belongsTo(() => Vulnerable)
+  declare vulnerable: BelongsTo<typeof Vulnerable>
 
-  @hasMany(() => Token)
-  declare token_id: HasMany<typeof Token>
+  @belongsTo(() => Food)
+  declare food: BelongsTo<typeof Food>
 
-  @hasMany(() => Vulnerable)
-  declare vulnerable_id: HasMany<typeof Vulnerable>
+  @belongsTo(() => Token)
+  declare token: BelongsTo<typeof Token>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

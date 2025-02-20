@@ -5,9 +5,19 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.uuid('id').primary()
-      table.uuid('donor_id').references('id').inTable('donors').notNullable().onDelete('CASCADE')
-      table.uuid('food_id').references('id').inTable('foods').notNullable().onDelete('CASCADE')
+      table.increments('id')
+      table
+        .increments('donor_id')
+        .references('id')
+        .inTable('donors')
+        .notNullable()
+        .onDelete('CASCADE')
+      table
+        .increments('food_id')
+        .references('id')
+        .inTable('foods')
+        .notNullable()
+        .onDelete('CASCADE')
       table.integer('quantity_donated').notNullable()
       table.timestamp('date_donation')
       table.timestamp('updated_at')

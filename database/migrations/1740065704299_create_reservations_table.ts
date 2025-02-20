@@ -5,10 +5,25 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.uuid('id').primary()
-      table.uuid('vulnerable_id').references('id').inTable('vulnerables').notNullable().onDelete('CASCADE')
-      table.uuid('food_id').references('id').inTable('foods').notNullable().onDelete('CASCADE')
-      table.uuid('token_id').references('id').inTable('tokens').notNullable().onDelete('CASCADE')
+      table.increments('id')
+      table
+        .increments('vulnerable_id')
+        .references('id')
+        .inTable('vulnerables')
+        .notNullable()
+        .onDelete('CASCADE')
+      table
+        .increments('food_id')
+        .references('id')
+        .inTable('foods')
+        .notNullable()
+        .onDelete('CASCADE')
+      table
+        .increments('token_id')
+        .references('id')
+        .inTable('tokens')
+        .notNullable()
+        .onDelete('CASCADE')
       table.enum('status', ['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED']).defaultTo('PENDING')
       table.timestamp('pickup_date')
       table.timestamp('created_at')

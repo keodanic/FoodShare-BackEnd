@@ -20,7 +20,7 @@ export default class Vulnerable extends compose(BaseModel, AuthFinder) {
   declare name: string
 
   @column()
-  declare cpf: string
+  declare cpf: string | null
 
   @column()
   declare email: string

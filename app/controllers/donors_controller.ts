@@ -1,20 +1,31 @@
+import Donor from '#models/donor'
+import { createDonorValidator } from '#validators/donor'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class DonorsController {
-  /**
-   * Display a list of resource
-   */
-  async index({}: HttpContext) {}
-
-  /**
-   * Display form to create a new record
-   */
-  async create({}: HttpContext) {}
+  async index({}: HttpContext) {
+    const donor = await Donor.query()
+    return donor
+  }
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {}
+  async store({ request }: HttpContext) {
+    const { name, cnpj, email, local, password, responsible, latitude, longitude } =
+      await request.validateUsing(createDonorValidator)
+    const donor = await Donor.create({
+      name,
+      cnpj,
+      email,
+      local,
+      password,
+      responsible,
+      latitude,
+      longitude,
+    })
+    return donor
+  }
 
   /**
    * Show individual record
@@ -34,5 +45,7 @@ export default class DonorsController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params }: HttpContext) {
+    
+  }
 }
